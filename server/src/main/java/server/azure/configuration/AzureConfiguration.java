@@ -4,7 +4,6 @@ package server.azure.configuration;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-// @EnableConfigurationProperties(AzureProperties.class);
 public class AzureConfiguration {
     
 }
