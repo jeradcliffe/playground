@@ -1,5 +1,6 @@
 .app {    
-    background: url('../../images/particles.jpg') center;
+    /*background: url('../../images/particles.jpg') center;*/
+    background-color: white;
     background-size: cover;
     overflow: hidden;
     position: absolute; 
