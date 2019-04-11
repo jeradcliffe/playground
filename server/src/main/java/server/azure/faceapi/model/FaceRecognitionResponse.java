@@ -1,4 +1,4 @@
-package server.azure.faceapi;
+package server.azure.faceapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
