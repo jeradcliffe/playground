@@ -33,7 +33,7 @@ public class FaceRecognitionService {
     private JsonParser jsonParser;
     private HttpClient httpClient;
     private AzureProperties azureProperties;
-    private static final String  FACE_ATTRIBUTE_PARAMS = "age,gender,smile,facialHair,glasses,emotion,hair,makeup,accessories";
+    private static final String FACE_ATTRIBUTE_PARAMS = "age,gender,smile,facialHair,glasses,emotion,hair,makeup,accessories";
     private static final String IMAGE_WITH_FACES = "{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/c/c3/RH_Louise_Lillian_Gish.jpg\"}";
 
     public FaceRecognitionService(AzureProperties azureProperties) {
@@ -43,11 +43,11 @@ public class FaceRecognitionService {
         this.httpClient = HttpClientBuilder.create().build();
     }
 
-    public String recognizeFace(String directory) throws URISyntaxException, IOException {
-            URI uri = buildUri();
-            HttpPost postRequest = buildHttpRequestViaByteArray(uri, directory);
-            HttpEntity responseEntity = callAzureToAnalyzeFace(postRequest);
-            return formatResponseJson(responseEntity);
+    public String recognizeFace(byte[] image) throws URISyntaxException, IOException {
+        URI uri = buildUri();
+        HttpPost postRequest = buildHttpRequestViaByteArray(uri, image);
+        HttpEntity responseEntity = callAzureToAnalyzeFace(postRequest);
+        return formatResponseJson(responseEntity);
     }
 
     private URI buildUri() throws URISyntaxException {
@@ -59,13 +59,12 @@ public class FaceRecognitionService {
         return uriBuilder.build();
     }
 
-    private HttpPost buildHttpRequestViaByteArray(URI uri, String directory) throws IOException {
+    private HttpPost buildHttpRequestViaByteArray(URI uri, byte[] image) {
         HttpPost postRequest = new HttpPost(uri);
 
         postRequest.setHeader("Content-Type", "application/octet-stream");
         postRequest.setHeader("Ocp-Apim-Subscription-Key", azureProperties.getSubscriptionKey());
 
-        byte[] image = pullImageFromDirectory(directory);
         ByteArrayEntity reqEntity = new ByteArrayEntity(image);
         postRequest.setEntity(reqEntity);
 
@@ -123,8 +122,4 @@ public class FaceRecognitionService {
 //        File outputfile = new File(directory + "saved.png");
 //        ImageIO.write(img, "png", outputfile);
 //    }
-
-    private byte[] pullImageFromDirectory(String directory) throws IOException {
-        return FileUtils.readFileToByteArray(new File(directory));
-    }
 }
