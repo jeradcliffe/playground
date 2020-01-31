@@ -3,6 +3,6 @@ import App from '../components/App/App';
 import {shallow} from 'enzyme';
 
 test('application loads', () => {
-    const tree = shallow(<App/>);
-    expect(tree).toHaveLength(1);
+  const tree = shallow(<App/>);
+  expect(tree).toHaveLength(1);
 });

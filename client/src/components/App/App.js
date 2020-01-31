@@ -1,14 +1,14 @@
 import React from 'react';
 
 import './App.css';
-import Body from '../Router/Body';
-import NavigationBar from '../Navigation/NavigationBar';
+import Body from '../Body/Body';
+import NavigationBar from '../NavigationBar/NavigationBar';
 
 const App = () => (
-    <div className="app">
-        <NavigationBar/>
-        <Body/>
-    </div>
+  <div className="app">
+    <NavigationBar/>
+    <Body/>
+  </div>
 );
 
 export default App;
